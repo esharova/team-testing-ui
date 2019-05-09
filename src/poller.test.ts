@@ -12,7 +12,10 @@ describe('Тесты на поллер решения от банка', () => {
     });
     it('каждую секунду мы спрашиваем апишку, готово ли решение?', () => {
         fetchDecisionStatus.mockImplementation(() => ({
-            then: (callback: Function) => { callback({ status: 'IN_PROGRESS' }); }
+            then: (callback: Function) => {
+                callback({ status: 'IN_PROGRESS' });
+                return { catch: () => {} }
+            }
         }));
         const poller = new Poller();
         poller.start();
@@ -22,7 +25,7 @@ describe('Тесты на поллер решения от банка', () => {
 
     it('мы прекращаем полить в тот момент, когда возвращается какое-то решение', () => {
         fetchDecisionStatus.mockImplementation(() => ({
-            then: (callback: Function) => { callback({ status: 'SUCCESS' }); }
+            then: (callback: Function) => { callback({ status: 'SUCCESS' }); return { catch: () => {} } }
         }));
         const poller = new Poller();
         poller.start();
@@ -34,7 +37,8 @@ describe('Тесты на поллер решения от банка', () => {
         const decision = { status: 'SUCCESS' };
         fetchDecisionStatus.mockImplementation(() => ({
             then: (callback: Function) => {
-                callback(decision); }
+                callback(decision); return { catch: () => {} }
+            }
         }));
         const decisionCallback = jest.fn();
         const poller = new Poller(decisionCallback);

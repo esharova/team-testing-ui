@@ -12,6 +12,7 @@ export class Poller {
                 .then((decision: IDecision) => {
                     this.processDecision(decision);
                 })
+                .catch(() => {})
         }, 1000);
     }
 
