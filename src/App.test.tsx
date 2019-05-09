@@ -6,6 +6,10 @@ import { Poller } from './poller';
 jest.mock('./poller');
 
 describe('Хочу ипотеку', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  })
+
   it('renders without crashing', () => {
     const renderComponent = shallow(<App />);
     const button = renderComponent.find('button');
@@ -33,7 +37,7 @@ describe('Хочу ипотеку', () => {
   it('когда решение получено, его надо показать и закончить ожидание; при этом кнопки хочу тоже нет', (done) => {
     const renderComponent = shallow(<App />);
     renderComponent.setState({ decision: 'SUCCESS'}, () => {
-      const statusComponent = renderComponent.find('Status');
+      const statusComponent = renderComponent.find('Decision');
       expect(statusComponent.exists()).toBeTruthy();
       expect(renderComponent.find('span').exists()).toBeFalsy();
       expect(renderComponent.find('button').exists()).toBeFalsy();

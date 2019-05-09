@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Poller } from './poller';
-import { Status } from './status';
+import { Decision } from './decision';
 import { IDecision } from './api-decision';
 
 interface IAppProps {
@@ -9,7 +9,7 @@ interface IAppProps {
 
 interface IAppState {
     inProgress: boolean;
-    decision?: string;
+    decision?: IDecision;
 }
 
 class App extends Component<IAppProps, IAppState>{
@@ -28,7 +28,7 @@ class App extends Component<IAppProps, IAppState>{
     }
 
     private updateDecision = (decision: IDecision) => {
-        this.setState({ decision: decision.status, inProgress: false });
+        this.setState({ decision, inProgress: false });
     }
 
     public render() {
@@ -43,7 +43,7 @@ class App extends Component<IAppProps, IAppState>{
                         inProgress && <span>Ждёмс...</span>
                     }
                     {
-                        !!decision && <Status status={decision} />
+                        !!decision && <Decision decision={decision} />
                     }
 
                 </header>

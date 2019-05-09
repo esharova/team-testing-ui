@@ -1,7 +1,7 @@
 import { fetchDecisionStatus, IDecision } from './api-decision';
 
 export class Poller {
-    constructor(private decisionCallback: (decision: IDecision) => void) {}
+    constructor(private decisionCallback?: (decision: IDecision) => void) {}
 
     // @ts-ignore
     private timedId: NodeJS.Timeout;
@@ -17,7 +17,7 @@ export class Poller {
 
     private processDecision(decision: IDecision) {
         if (decision.status !== 'IN_PROGRESS') {
-            this.decisionCallback(decision);
+            this.decisionCallback && this.decisionCallback(decision);
             clearInterval(this.timedId);
         }
     }

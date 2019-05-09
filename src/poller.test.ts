@@ -6,7 +6,14 @@ jest.mock('./api-decision');
 jest.useFakeTimers();
 
 describe('Тесты на поллер решения от банка', () => {
+    afterEach(() => {
+       jest.clearAllMocks();
+       jest.clearAllTimers();
+    });
     it('каждую секунду мы спрашиваем апишку, готово ли решение?', () => {
+        fetchDecisionStatus.mockImplementation(() => ({
+            then: (callback: Function) => { callback({ status: 'IN_PROGRESS' }); }
+        }));
         const poller = new Poller();
         poller.start();
         jest.advanceTimersByTime(5000);
