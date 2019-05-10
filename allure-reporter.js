@@ -1,13 +1,3 @@
-const Allure = require('allure-js-commons').default;
-
-const STATUS =  {
-    Passed : 'passed',
-    Pending: 'pending',
-    Skipped: 'skipped',
-    Failed: 'failed',
-    Broken: 'broken'
-}
-
 class Reporter {
 
     constructor(allure) {
@@ -36,3 +26,4 @@ class Reporter {
 }
 
 module.exports = { Reporter };
+export default undefined;

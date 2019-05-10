@@ -4,7 +4,7 @@ const mkdirp = require('mkdirp');
 const stripAnsi = require('strip-ansi');
 const Reporter = require('./allure-reporter').Reporter;
 
-function registerAllureReporter () {
+export function registerAllureReporter () {
     /**
      * jasmine reporter does not support async.
      * So we store the screenshot promise and wait for it before each test
