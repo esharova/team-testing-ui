@@ -16,6 +16,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --coverage",
+    "int-test": "jest --config=integration-jest.config.js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
