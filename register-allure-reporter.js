@@ -2,7 +2,7 @@ const Allure = require('allure-js-commons');
 const path = require('path');
 const mkdirp = require('mkdirp');
 const stripAnsi = require('strip-ansi');
-const Reporter = require('./allure-reporter').Reporter;
+import { Reporter } from './allure-reporter';
 
 function registerAllureReporter () {
     /**
@@ -91,5 +91,4 @@ Attachment.prototype.toXML = function () {
     };
 };
 
-module.exports = { registerAllureReporter };
-export default undefined;
+export { registerAllureReporter };

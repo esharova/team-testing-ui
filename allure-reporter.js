@@ -1,4 +1,4 @@
-class Reporter {
+export class Reporter {
 
     constructor(allure) {
         this.allure = allure;
@@ -24,6 +24,3 @@ class Reporter {
         return this;
     };
 }
-
-module.exports = { Reporter };
-export default undefined;
