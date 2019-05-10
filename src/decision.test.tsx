@@ -20,7 +20,7 @@ describe('Компонен Decision', () => {
     it('Если статус success мы показываем список офферов', () => {
         const offers: IOffer[] = [
             {} as IOffer, {} as IOffer
-        ]
+        ];
         const decision: IDecision = { status: 'SUCCESS', offers };
         const statusComponent = shallow(<Decision decision={ decision }/>);
         expect(statusComponent .find('Offer')).toHaveLength(2);

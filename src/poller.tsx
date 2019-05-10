@@ -5,21 +5,28 @@ export class Poller {
 
     // @ts-ignore
     private timedId: NodeJS.Timeout;
+    private run = () => {
+        fetchDecisionStatus()
+            .then((decision: IDecision) => {
+                clearTimeout(this.timedId);
+                this.processDecision(decision);
+
+            })
+            .catch(() => {
+                clearTimeout(this.timedId);
+                this.timedId = setTimeout(this.run, 1000);
+            })
+    }
 
     public start() {
-        this.timedId = setInterval( () => {
-            fetchDecisionStatus()
-                .then((decision: IDecision) => {
-                    this.processDecision(decision);
-                })
-                .catch(() => {})
-        }, 1000);
+        this.timedId = setTimeout(this.run, 20);
     }
 
     private processDecision(decision: IDecision) {
         if (decision.status !== 'IN_PROGRESS') {
             this.decisionCallback && this.decisionCallback(decision);
-            clearInterval(this.timedId);
+        } else {
+            this.timedId = setTimeout(this.run, 1000);
         }
     }
 

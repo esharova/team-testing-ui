@@ -8,17 +8,24 @@ describe('Интеграционные тесты ui', () => {
                 offersRequestCounter++;
                 setTimeout(() => {
                     interceptedRequest.continue();
-                }, 2000);
+                }, 3000);
             } else
                 interceptedRequest.continue();
+        });
+
+        page.on('response', interceptedResponse => {
+            if (interceptedResponse.url().endsWith('/offers')) {
+                offersRequestCounter--;
+            }
         });
 
         const button = await page.waitForXPath('//*[text()="Хочу ипотеку"]');
         await button.click();
 
         setTimeout(() => {
-            expect(offersRequestCounter).toEqual(2);
+            expect(offersRequestCounter).toBeLessThanOrEqual(1);
             done();
         }, 3000);
+
     });
 });
