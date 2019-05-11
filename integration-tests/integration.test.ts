@@ -1,5 +1,9 @@
 describe('Интеграционные тесты ui', () => {
+    reporter.epic("Получение решения от банков");
+
     it('Эмулируем баг с продакшена 666', async (done) => {
+        reporter.feature("Обновление информациии о решении");
+        reporter.addLabel('tag', 'bug');
         await page.goto('http://localhost:3000');
         await page.setRequestInterception(true);
         let offersRequestCounter = 0;

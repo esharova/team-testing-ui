@@ -4,6 +4,9 @@ import { shallow } from 'enzyme';
 import { IOffer } from '../types/offer';
 
 describe('компонент оффера', () => {
+    reporter.epic("Получение решения от банков");
+    reporter.feature("Отображение предложения от банка");
+
     it('должен отображать параметры оффера', () => {
         const offer: IOffer = {
             rate: 10.05,

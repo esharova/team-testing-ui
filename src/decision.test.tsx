@@ -5,6 +5,9 @@ import { IOffer } from '../types/offer';
 import { IDecision } from './api-decision';
 
 describe('Компонен Decision', () => {
+    reporter.epic("Получение решения от банков");
+    reporter.feature("Отображение решения банка");
+
     it('should render', () => {
         const decision = { status: '' };
         const statusComponent = shallow(<Decision decision={ decision }/>);

@@ -6,6 +6,9 @@ import { Poller } from './poller';
 jest.mock('./poller');
 
 describe('Хочу ипотеку', () => {
+  reporter.epic("Получение решения от банков");
+  reporter.feature("Отправка запроса на ипотеку");
+
   afterEach(() => {
     jest.clearAllMocks();
   })

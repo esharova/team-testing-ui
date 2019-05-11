@@ -42,10 +42,14 @@ function registerAllureReporter () {
 
         async suiteDone() {
             this.allure.endSuite();
+            reporter.labels = {};
         };
 
         specStarted(spec) {
             this.allure.startCase(spec.description);
+            Object.keys(reporter.labels).forEach((label) => {
+                this.allure.getCurrentTest().addLabel(label, reporter.labels[label]);
+            })
         };
 
         specDone(spec) {

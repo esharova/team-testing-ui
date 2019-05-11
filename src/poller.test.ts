@@ -6,6 +6,9 @@ jest.mock('./api-decision');
 jest.useFakeTimers();
 
 describe('Тесты на поллер решения от банка', () => {
+    reporter.epic("Получение решения от банков");
+    reporter.feature("Обновление информациии о решении");
+
     afterEach(() => {
        jest.clearAllMocks();
        jest.clearAllTimers();
@@ -24,6 +27,7 @@ describe('Тесты на поллер решения от банка', () => {
     });
 
     it('мы прекращаем полить в тот момент, когда возвращается какое-то решение', () => {
+
         fetchDecisionStatus.mockImplementation(() => ({
             then: (callback: Function) => { callback({ status: 'SUCCESS' }); return { catch: () => {} } }
         }));
