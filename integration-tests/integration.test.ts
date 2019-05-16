@@ -10,11 +10,9 @@ describe('Интеграционные тесты ui', () => {
         page.on('request', interceptedRequest => {
             if (interceptedRequest.url().endsWith('/offers')) {
                 offersRequestCounter++;
-                setTimeout(() => {
-                    interceptedRequest.continue();
-                }, 3000);
-            } else
-                interceptedRequest.continue();
+            }
+
+            interceptedRequest.continue();
         });
 
         page.on('response', interceptedResponse => {
