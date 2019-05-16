@@ -24,6 +24,6 @@ export interface IDecision {
 // }
 
 export function fetchDecisionStatus(): Promise<IDecision> {
-    return fetch('http://localhost:8080/offers', { method: 'GET', credentials: 'include' })
+    return fetch('http://localhost:8080/offers', { method: 'GET' })
         .then(response => response.json());
 }

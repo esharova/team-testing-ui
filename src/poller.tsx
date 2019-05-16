@@ -12,21 +12,16 @@ export class Poller {
                 this.processDecision(decision);
 
             })
-            .catch(() => {
-                clearTimeout(this.timedId);
-                this.timedId = setTimeout(this.run, 1000);
-            })
     }
 
     public start() {
-        this.timedId = setTimeout(this.run, 20);
+        this.timedId = setInterval(this.run, 1000);
     }
 
     private processDecision(decision: IDecision) {
         if (decision.status !== 'IN_PROGRESS') {
+            clearInterval(this.timedId);
             this.decisionCallback && this.decisionCallback(decision);
-        } else {
-            this.timedId = setTimeout(this.run, 1000);
         }
     }
 
