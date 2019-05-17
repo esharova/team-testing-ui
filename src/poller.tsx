@@ -8,7 +8,6 @@ export class Poller {
     private run = () => {
         fetchDecisionStatus()
             .then((decision: IDecision) => {
-                clearTimeout(this.timedId);
                 this.processDecision(decision);
 
             })
